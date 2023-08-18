@@ -2,10 +2,21 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"],
   "compilerOptions": {
-    "target": "es6",
-    "module": "nodenext",
+    "target": "es2015",
+    "module": "es2015",
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.Proxy",
+      "es2015.promise",
+      "es2015.collection",
+      "es2015.iterable",
+      "es2015"
+    ],
     "outDir": "dist",
     "rootDir": "src",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true
