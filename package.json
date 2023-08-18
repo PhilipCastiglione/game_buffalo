@@ -1,0 +1,17 @@
+{
+  "name": "buffalo",
+  "version": "0.1.0",
+  "description": "a game",
+  "scripts": {
+    "start": "parcel ./index.html",
+    "build": "parcel build ./index.html",
+    "check": "tsc --noEmit"
+  },
+  "author": "Philip Castiglione",
+  "license": "Unlicense",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  }
+}
