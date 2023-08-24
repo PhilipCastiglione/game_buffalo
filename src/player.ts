@@ -1,5 +1,5 @@
 import { Actor, CollisionGroup, CollisionType, Color, Engine, Keys, Screen } from 'excalibur'
-import { Weapon } from './weapon'
+import { PlayerWeapon } from './playerWeapon'
 import { Shield } from './shield'
 
 export class Player extends Actor {
@@ -9,18 +9,18 @@ export class Player extends Actor {
   public momentum: number = 50
   public rotateSpeed: number = 4
   public collisionGroup: CollisionGroup
-  public weapon: Weapon
+  public playerWeapon: PlayerWeapon
   public shield: Shield
 
-  constructor(screen: Screen, collisionGroup: CollisionGroup) {
+  constructor(game: Engine, collisionGroup: CollisionGroup) {
     super({
-      pos: screen.center,
+      pos: game.screen.center,
       radius: 20,
       color: Color.Chartreuse,
       collisionType: CollisionType.Active
     })
     this.collisionGroup = collisionGroup
-    this.weapon = new Weapon(this.pos, collisionGroup)
+    this.playerWeapon = new PlayerWeapon(game, this.pos, collisionGroup)
     this.shield = new Shield(this.pos, collisionGroup)
   }
 
@@ -44,12 +44,12 @@ export class Player extends Actor {
 
     const rotationDistance = this.rotateSpeed * delta * 0.001
     if (engine.input.keyboard.isHeld(Keys.Right)) {
-      this.weapon.rotation += rotationDistance
+      this.playerWeapon.rotation += rotationDistance
     }
     if (engine.input.keyboard.isHeld(Keys.Left)) {
-      this.weapon.rotation -= rotationDistance
+      this.playerWeapon.rotation -= rotationDistance
     }
-    this.weapon.pos = this.pos
+    this.playerWeapon.pos = this.pos
 
     if (engine.input.keyboard.isHeld(Keys.Up)) {
       this.shield.rotation += rotationDistance

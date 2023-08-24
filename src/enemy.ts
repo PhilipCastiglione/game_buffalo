@@ -1,4 +1,4 @@
-import { Actor, CollisionGroup, CollisionType, Color, Screen, Vector } from "excalibur"
+import { Actor, CollisionGroup, CollisionType, Color, Screen, Vector } from 'excalibur'
 
 
 export class Enemy extends Actor {
