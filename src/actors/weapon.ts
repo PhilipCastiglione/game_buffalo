@@ -15,9 +15,10 @@ export class Weapon extends Actor {
     this._game = game
   }
 
-  public update(engine: Engine, delta: number) {
+  public update(_engine: Engine, delta: number) {
     this._shotCooldown -= delta
     if (this._shotCooldown <= 0) {
+      this.pos = this._source.pos
       this._shotCooldown = this._fireRate
       this._fire()
     }

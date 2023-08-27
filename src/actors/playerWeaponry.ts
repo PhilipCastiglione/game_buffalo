@@ -4,9 +4,9 @@ import { CollisionGroups } from '../collisionGroups'
 
 export class PlayerWeaponry extends Actor {
   private _weapons : Array<Weapon> = new Array<Weapon>()
-  private _game : Engine
+  private _engine : Engine
 
-  constructor(game: Engine, pos: Vector) {
+  constructor(engine: Engine, pos: Vector) {
     super({
       pos: pos,
       width: 10,
@@ -14,14 +14,13 @@ export class PlayerWeaponry extends Actor {
       color: Color.Magenta,
       collisionType: CollisionType.PreventCollision
     })
-    this._game = game
-
-    const initialWeapon = new Weapon(game, this, CollisionGroups.Player)
+    this._engine = engine
+    const initialWeapon = new Weapon(engine, this, CollisionGroups.Player)
     this.addWeapon(initialWeapon)
   }
   
   public addWeapon(weapon: Weapon) {
     this._weapons.push(weapon)
-    this._game.add(weapon)
+    this._engine.add(weapon)
   }
 }

@@ -4,28 +4,26 @@ import { Shield } from './shield'
 import { CollisionGroups } from '../collisionGroups'
 
 export class Player extends Actor {
+  public playerWeaponry: PlayerWeaponry
+  public shield: Shield
+  
   private _maxSpeed: number = 100
   private _acceleration: number = 200
   private _health: number = 100
   private _momentum: number = 50
   private _rotateSpeed: number = 4
-  public playerWeaponry: PlayerWeaponry
-  public shield: Shield
 
-  constructor(game: Engine) {
+  constructor(engine: Engine) {
     super({
-      pos: game.screen.center,
+      pos: engine.screen.center,
       radius: 20,
       color: Color.Chartreuse,
       collisionType: CollisionType.Active,
       collisionGroup: CollisionGroups.Player
     })
-    this.playerWeaponry = new PlayerWeaponry(game, this.pos)
+    this.playerWeaponry = new PlayerWeaponry(engine, this.pos)
     this.shield = new Shield(this.pos)
   }
-  
-  // public onInitialize(engine: Engine) {
-  // }
 
   public update(engine: Engine, delta: number) {
     const deceleration = this._momentum * delta * 0.001

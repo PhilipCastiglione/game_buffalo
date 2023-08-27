@@ -18,5 +18,4 @@ documentation
 
 ---
 
-move behaviour to on initialize
 anchor shield and weapon
