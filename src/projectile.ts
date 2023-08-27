@@ -1,7 +1,7 @@
-import { Actor, CollisionGroup, CollisionType, Color, Engine, Vector } from 'excalibur'
+import { Actor, CollisionGroup, CollisionType, Color, Vector } from 'excalibur'
 
 export class Projectile extends Actor {
-  public velocity : number = 1000
+  private _velocity : number = 1000
 
   constructor(pos: Vector, rotation: number, collisionGroup: CollisionGroup) {
     super({
@@ -13,6 +13,6 @@ export class Projectile extends Actor {
       collisionType: CollisionType.Passive,
       collisionGroup: collisionGroup
     })
-    this.vel = new Vector(0, this.velocity).rotate(rotation)
+    this.vel = new Vector(0, this._velocity).rotate(rotation)
   }
 }

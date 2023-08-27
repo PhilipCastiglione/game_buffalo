@@ -1,34 +1,34 @@
-import { Actor, CollisionGroup, CollisionType, Color, Engine, Keys, Screen } from 'excalibur'
+import { Actor, CollisionType, Color, Engine, Keys } from 'excalibur'
 import { PlayerWeapon } from './playerWeapon'
 import { Shield } from './shield'
+import { CollisionGroups } from './collisionGroups'
 
 export class Player extends Actor {
-  public maxSpeed: number = 100
-  public acceleration: number = 200
-  public health: number = 100
-  public momentum: number = 50
-  public rotateSpeed: number = 4
-  public collisionGroup: CollisionGroup
+  private _maxSpeed: number = 100
+  private _acceleration: number = 200
+  private _health: number = 100
+  private _momentum: number = 50
+  private _rotateSpeed: number = 4
   public playerWeapon: PlayerWeapon
   public shield: Shield
 
-  constructor(game: Engine, collisionGroup: CollisionGroup) {
+  constructor(game: Engine) {
     super({
       pos: game.screen.center,
       radius: 20,
       color: Color.Chartreuse,
-      collisionType: CollisionType.Active
+      collisionType: CollisionType.Active,
+      collisionGroup: CollisionGroups.Player
     })
-    this.collisionGroup = collisionGroup
-    this.playerWeapon = new PlayerWeapon(game, this.pos, collisionGroup)
-    this.shield = new Shield(this.pos, collisionGroup)
+    this.playerWeapon = new PlayerWeapon(game, this.pos)
+    this.shield = new Shield(this.pos)
   }
 
   public update(engine: Engine, delta: number) {
-    const deceleration = this.momentum * delta * 0.001
+    const deceleration = this._momentum * delta * 0.001
     this._decelerate(deceleration)
 
-    const moveDistance = this.acceleration * delta * 0.001
+    const moveDistance = this._acceleration * delta * 0.001
     if (engine.input.keyboard.isHeld(Keys.W)) {
       this._moveUp(moveDistance)
     }
@@ -42,7 +42,7 @@ export class Player extends Actor {
       this._moveRight(moveDistance)
     }
 
-    const rotationDistance = this.rotateSpeed * delta * 0.001
+    const rotationDistance = this._rotateSpeed * delta * 0.001
     if (engine.input.keyboard.isHeld(Keys.Right)) {
       this.playerWeapon.rotation += rotationDistance
     }
@@ -79,19 +79,18 @@ export class Player extends Actor {
   }
 
   private _moveUp(distance: number) {
-    this.vel.y = Math.max(this.vel.y - distance, -this.maxSpeed)
+    this.vel.y = Math.max(this.vel.y - distance, -this._maxSpeed)
   }
 
   private _moveDown(distance: number) {
-    this.vel.y = Math.min(this.vel.y + distance, this.maxSpeed)
+    this.vel.y = Math.min(this.vel.y + distance, this._maxSpeed)
   }
 
   private _moveLeft(distance: number) {
-    this.vel.x = Math.max(this.vel.x - distance, -this.maxSpeed)
+    this.vel.x = Math.max(this.vel.x - distance, -this._maxSpeed)
   }
 
   private _moveRight(distance: number) {
-    this.vel.x = Math.min(this.vel.x + distance, this.maxSpeed)
+    this.vel.x = Math.min(this.vel.x + distance, this._maxSpeed)
   }
-
 }

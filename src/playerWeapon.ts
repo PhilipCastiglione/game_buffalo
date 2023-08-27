@@ -1,22 +1,27 @@
-import { Actor, CollisionGroup, CollisionType, Color, Engine, Vector } from 'excalibur'
+import { Actor, CollisionType, Color, Engine, Vector } from 'excalibur'
 import { Weapon } from './weapon'
+import { CollisionGroups } from './collisionGroups'
 
 export class PlayerWeapon extends Actor {
-  public collisionGroup : CollisionGroup
-  public weapons : Array<Weapon> = new Array<Weapon>()
+  private _weapons : Array<Weapon> = new Array<Weapon>()
+  private _game : Engine
 
-  constructor(game: Engine, pos: Vector, collisionGroup: CollisionGroup) {
+  constructor(game: Engine, pos: Vector) {
     super({
       pos: pos,
       width: 10,
       height: 20,
       color: Color.Magenta,
-      collisionType: CollisionType.PreventCollision,
-      collisionGroup: collisionGroup
+      collisionType: CollisionType.PreventCollision
     })
-    this.collisionGroup = collisionGroup
-    const initialWeapon = new Weapon(game, this, collisionGroup)
-    this.weapons.push(initialWeapon)
-    game.add(initialWeapon)
+    this._game = game
+
+    const initialWeapon = new Weapon(game, this, CollisionGroups.Player)
+    this.addWeapon(initialWeapon)
+  }
+  
+  public addWeapon(weapon: Weapon) {
+    this._weapons.push(weapon)
+    this._game.add(weapon)
   }
 }

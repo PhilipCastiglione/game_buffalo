@@ -1,33 +1,33 @@
-import { Actor, CollisionGroup, CollisionType, Color, Engine, Vector } from 'excalibur'
+import { Actor, CollisionGroup, Engine } from 'excalibur'
 import { Projectile } from './projectile'
 
 export class Weapon extends Actor {
-  public collisionGroup : CollisionGroup
-  public fireRate : number = 1000
-  public shotCooldown : number = 1000
-  public game: Engine
-  public source: Actor
+  private _collisionGroup : CollisionGroup
+  private _fireRate : number = 1000
+  private _shotCooldown : number = 1000
+  private _game: Engine
+  private _source: Actor
 
   constructor(game: Engine, source: Actor, collisionGroup: CollisionGroup) {
     super()
-    this.source = source
-    this.collisionGroup = collisionGroup
-    this.game = game
+    this._source = source
+    this._collisionGroup = collisionGroup
+    this._game = game
   }
 
   public update(engine: Engine, delta: number) {
-    this.shotCooldown -= delta
-    if (this.shotCooldown <= 0) {
-      this.shotCooldown = this.fireRate
+    this._shotCooldown -= delta
+    if (this._shotCooldown <= 0) {
+      this._shotCooldown = this._fireRate
       this._fire()
     }
   }
 
   private _fire() {
-    const projectile = new Projectile(this.source.pos, this.source.rotation, this.collisionGroup)
+    const projectile = new Projectile(this._source.pos, this._source.rotation, this._collisionGroup)
     projectile.on("collisionstart", (event) => {
       console.log("hit", event)
     })
-    this.game.add(projectile)
+    this._game.add(projectile)
   }
 }
