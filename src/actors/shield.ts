@@ -5,8 +5,8 @@ export class Shield extends Actor {
   constructor(pos: Vector) {
     super({
       pos: pos,
-      width: 20,
-      height: 10,
+      radius: 20,
+      anchor: new Vector(0.5, 0.75),
       color: Color.Blue,
       collisionType: CollisionType.Passive,
       collisionGroup: CollisionGroups.Player

@@ -17,5 +17,3 @@ https://excaliburjs.com/docs/hosting/
 documentation
 
 ---
-
-anchor shield and weapon
