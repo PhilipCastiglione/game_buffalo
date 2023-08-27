@@ -1,8 +1,8 @@
 import { Actor, CollisionType, Color, Engine, Vector } from 'excalibur'
 import { Weapon } from './weapon'
-import { CollisionGroups } from './collisionGroups'
+import { CollisionGroups } from '../collisionGroups'
 
-export class PlayerWeapon extends Actor {
+export class PlayerWeaponry extends Actor {
   private _weapons : Array<Weapon> = new Array<Weapon>()
   private _game : Engine
 

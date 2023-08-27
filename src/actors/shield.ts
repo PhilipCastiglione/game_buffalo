@@ -1,4 +1,4 @@
-import { CollisionGroups } from './collisionGroups'
+import { CollisionGroups } from '../collisionGroups'
 import { Actor, CollisionType, Color, Vector } from 'excalibur'
 
 export class Shield extends Actor {

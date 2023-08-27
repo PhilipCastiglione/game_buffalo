@@ -1,6 +1,6 @@
 import { Engine } from 'excalibur';
-import { Player } from './player';
-import { Enemy } from './enemy';
+import { Player } from './actors/player';
+import { Enemy } from './actors/enemy';
 
 const game = new Engine({
   width: 1024,
@@ -9,12 +9,12 @@ const game = new Engine({
 
 const player = new Player(game)
 game.add(player)
-game.add(player.playerWeapon)
+game.add(player.playerWeaponry)
 game.add(player.shield)
 
-const enemy = new Enemy(game)
+const enemy = new Enemy(game, player)
 game.add(enemy)
-const enemy2 = new Enemy(game)
+const enemy2 = new Enemy(game, player)
 game.add(enemy2)
 
 game.currentScene.camera.strategy.lockToActor(player)

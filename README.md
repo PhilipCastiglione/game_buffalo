@@ -15,3 +15,8 @@ https://github.com/excaliburjs/ludum-50/blob/main/.github/workflows/main.yml
 https://excaliburjs.com/docs/hosting/
 
 documentation
+
+---
+
+move behaviour to on initialize
+anchor shield and weapon

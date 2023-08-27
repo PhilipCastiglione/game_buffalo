@@ -1,7 +1,7 @@
 import { Actor, CollisionType, Color, Engine, Keys } from 'excalibur'
-import { PlayerWeapon } from './playerWeapon'
+import { PlayerWeaponry } from './playerWeaponry'
 import { Shield } from './shield'
-import { CollisionGroups } from './collisionGroups'
+import { CollisionGroups } from '../collisionGroups'
 
 export class Player extends Actor {
   private _maxSpeed: number = 100
@@ -9,7 +9,7 @@ export class Player extends Actor {
   private _health: number = 100
   private _momentum: number = 50
   private _rotateSpeed: number = 4
-  public playerWeapon: PlayerWeapon
+  public playerWeaponry: PlayerWeaponry
   public shield: Shield
 
   constructor(game: Engine) {
@@ -20,9 +20,12 @@ export class Player extends Actor {
       collisionType: CollisionType.Active,
       collisionGroup: CollisionGroups.Player
     })
-    this.playerWeapon = new PlayerWeapon(game, this.pos)
+    this.playerWeaponry = new PlayerWeaponry(game, this.pos)
     this.shield = new Shield(this.pos)
   }
+  
+  // public onInitialize(engine: Engine) {
+  // }
 
   public update(engine: Engine, delta: number) {
     const deceleration = this._momentum * delta * 0.001
@@ -44,12 +47,12 @@ export class Player extends Actor {
 
     const rotationDistance = this._rotateSpeed * delta * 0.001
     if (engine.input.keyboard.isHeld(Keys.Right)) {
-      this.playerWeapon.rotation += rotationDistance
+      this.playerWeaponry.rotation += rotationDistance
     }
     if (engine.input.keyboard.isHeld(Keys.Left)) {
-      this.playerWeapon.rotation -= rotationDistance
+      this.playerWeaponry.rotation -= rotationDistance
     }
-    this.playerWeapon.pos = this.pos
+    this.playerWeaponry.pos = this.pos
 
     if (engine.input.keyboard.isHeld(Keys.Up)) {
       this.shield.rotation += rotationDistance
