@@ -4,9 +4,9 @@ npm
 typescript
 parcel
 excalibur
+eslint
 
 ---
-linting
 testing
 ci
 
