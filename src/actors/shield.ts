@@ -1,7 +1,9 @@
 import { CollisionGroups } from '../collisionGroups'
-import { Actor, CollisionType, Color, Vector } from 'excalibur'
+import { CollisionType, Color, Vector } from 'excalibur'
+import { Projectile } from './projectile'
+import { Hittable } from './hittable'
 
-export class Shield extends Actor {
+export class Shield extends Hittable {
   constructor(pos: Vector) {
     super({
       pos: pos,
@@ -11,5 +13,9 @@ export class Shield extends Actor {
       collisionType: CollisionType.Passive,
       collisionGroup: CollisionGroups.Player
     })
+  }
+  
+  public handleHitBy(projectile: Projectile) {
+    console.log("shield hit by projectile", projectile)
   }
 }

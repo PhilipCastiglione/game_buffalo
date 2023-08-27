@@ -1,5 +1,6 @@
 import { Actor, CollisionGroup, Engine } from 'excalibur'
 import { Projectile } from './projectile'
+import { Hittable } from './hittable'
 
 export class Weapon extends Actor {
   private _collisionGroup : CollisionGroup
@@ -25,9 +26,11 @@ export class Weapon extends Actor {
   }
 
   private _fire() {
-    const projectile = new Projectile(this._source.pos, this._source.rotation, this._collisionGroup)
+    const projectile = new Projectile(this._source, this._collisionGroup)
     projectile.on("collisionstart", (event) => {
-      console.log("hit", event)
+      if (event.other instanceof Hittable) {
+        event.other.handleHitBy(projectile)
+      }
     })
     this._game.add(projectile)
   }

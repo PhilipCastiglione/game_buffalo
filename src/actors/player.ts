@@ -1,9 +1,11 @@
-import { Actor, CollisionType, Color, Engine, Keys } from 'excalibur'
+import { CollisionType, Color, Engine, Keys } from 'excalibur'
 import { PlayerWeaponry } from './playerWeaponry'
 import { Shield } from './shield'
 import { CollisionGroups } from '../collisionGroups'
+import { Projectile } from './projectile'
+import { Hittable } from './hittable'
 
-export class Player extends Actor {
+export class Player extends Hittable {
   public playerWeaponry: PlayerWeaponry
   public shield: Shield
   
@@ -59,6 +61,10 @@ export class Player extends Actor {
       this.shield.rotation -= rotationDistance
     }
     this.shield.pos = this.pos
+  }
+
+  public handleHitBy(projectile: Projectile) {
+    console.log("player hit by projectile", projectile)
   }
 
   private _decelerate(distance: number) {
